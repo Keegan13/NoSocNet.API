@@ -31,30 +31,68 @@ namespace NoSocNet.API.Models
         public bool Captcha { get; set; }
     }
 
-    public class LoginResponseModel : IHasResultCode
+    public class LoginResponseModel : ResultResponseBase
     {
-        public LoginResponseModel()
-        {
-            this.Messages = new List<string>();
-        }
-        public int ResultCode { get; set; }
-
-        public List<string> Messages { get; set; }
-
-        public Object Data { get; set; }
     }
-    public class UserInfoResponse : IHasResultCode
+    public class CaptchaUrlResponse
     {
-        public UserInfoResponse()
+        public string Url { get; set; }
+    }
+
+    public class ResultResponseBase : IHasResultCode
+    {
+        public ResultResponseBase()
         {
             this.Messages = new List<string>();
         }
+        public virtual Object Data { get; set; }
+        public virtual int ResultCode { get; set; }
+        public virtual List<string> Messages { get; set; }
+    }
+    public class ProfileResponseModel : ProfilePutInputModel
+    {
+        public PhotoViewModel Photos { get; set; }
+    }
+    public class StatusResponse : ResultResponseBase
+    {
 
-        public UserInfo Data { get; set; }
+    }
+    public class ProfilePutResponseModel : ResultResponseBase
+    {
 
-        public int ResultCode { get; set; }
+    }
+    public class UploadPhotoResponseModel : ResultResponseBase
+    {
+        public new PhotoViewModel Data { get; set; }
+    }
+    public class ProfilePutInputModel
+    {
+        public int UserId { get; set; }
+        public bool LookingForAJob { get; set; }
 
-        public List<string> Messages { get; set; }
+        public string LookingForAJobDescription { get; set; }
+
+        public string FullName { get; set; }
+
+        public ContactsViewModel Contacts { get; set; }
+    }
+
+    public class ContactsViewModel
+    {
+        public string Github { get; set; }
+        public string Vk { get; set; }
+        public string Facebook { get; set; }
+        public string Instagram { get; set; }
+
+        public string Twitter { get; set; }
+
+        public string Website { get; set; }
+        public string Youtube { get; set; }
+        public string MainLink { get; set; }
+    }
+    public class UserInfoResponse : ResultResponseBase
+    {
+
     }
 
     public class UserListInputModel
